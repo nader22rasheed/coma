@@ -1,0 +1,13 @@
+<!-- display_products.txt -->
+<html>
+ <body>
+ <h1>Products</h1>
+  
+ <div class="product">
+ <h2>PLACEHOLDER</h2>
+ <p>Price: PLACEHOLDER</p>
+ <img src="PLACEHOLDER" alt="PLACEHOLDER" />
+ </div>
+  
+ </body>
+</html>
