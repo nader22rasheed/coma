@@ -1,18 +1,18 @@
 package AST.HTML;
 
-public class ProgramNode {
-    private String info = "ProgramNode placeholder";
+import AST.ASTnode;
 
-    public ProgramNode() {}
-
-    @Override
-    public String toString() {
-        return "ProgramNode()";
+public class ProgramNode extends ASTnode {
+    public ProgramNode(int lineNumber) {
+        super("Program", lineNumber);
     }
 
-    // used by Main.saveAST if exists
+    @Override
     public void print(int indent) {
-        for (int i=0;i<indent;i++) System.out.print(" ");
-        System.out.println("ProgramNode");
+        String spaces = " ".repeat(indent * 2);
+        System.out.println(spaces + nodeName + " (Line: " + lineNumber + ")");
+        for (ASTnode child : children) {
+            if (child != null) child.print(indent + 1);
+        }
     }
 }

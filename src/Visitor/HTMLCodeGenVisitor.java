@@ -6,9 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.io.*;
 
 public class HTMLCodeGenVisitor {
-    public HTMLCodeGenVisitor() {}
-
-    // very small example: write a placeholder HTML using ProgramNode.toString()
     public void generate(ProgramNode program, String outPath) {
         String html = "<!doctype html>\n<html>\n<head><meta charset=\"utf-8\"><title>Generated</title></head>\n<body>\n";
         html += "<pre>" + program.toString() + "</pre>\n";

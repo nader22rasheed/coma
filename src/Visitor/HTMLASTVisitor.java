@@ -3,21 +3,14 @@ package Visitor;
 import AST.ASTnode;
 import AST.HTML.*;
 
-
 public class HTMLASTVisitor {
 
-    // =============== HtmlDocument =================
     public ASTnode visit(HtmlDocumentNode node) {
-        for (ASTnode n : node.prelude) {
-            visit(n);
-        }
-        for (HtmlElementNode e : node.elements) {
-            visit(e);
-        }
+        for (ASTnode n : node.prelude) visit(n);
+        for (HtmlElementNode e : node.elements) visit(e);
         return node;
     }
 
-    // =============== HtmlElements =================
     public ASTnode visit(HtmlElementsNode node) {
         for (HtmlMiscNode m : node.leadingMisc) visit(m);
         visit(node.mainElement);
@@ -25,7 +18,6 @@ public class HTMLASTVisitor {
         return node;
     }
 
-    // =============== HtmlElement variants =================
     public ASTnode visit(NormalTagNode node) {
         for (HtmlAttributeNode a : node.attributes) visit(a);
         if (node.content != null) visit(node.content);
@@ -37,52 +29,25 @@ public class HTMLASTVisitor {
         return node;
     }
 
-    public ASTnode visit(ScriptTagNode node) {
-        return node;
-    }
-
-    public ASTnode visit(ScriptletTagNode node) {
-        return node;
-    }
+    public ASTnode visit(ScriptTagNode node) { return node; }
+    public ASTnode visit(ScriptletTagNode node) { return node; }
 
     public ASTnode visit(StyleTagNode node) {
-        if (node.stylesheet != null) node.stylesheet.print(1); // أو visit على StylesheetNode
+        if (node.stylesheet != null) visit(node.stylesheet);
         return node;
     }
 
-    // =============== HtmlContent =================
     public ASTnode visit(HtmlContentNode node) {
         for (ASTnode c : node.children) visit(c);
         return node;
     }
 
-    // =============== HtmlText =================
-    public ASTnode visit(HtmlTextNode node) {
-        return node;
-    }
-
-    // =============== HtmlWs =================
-    public ASTnode visit(HtmlWsNode node) {
-        return node;
-    }
-
-    // =============== HtmlMisc =================
-    public ASTnode visit(HtmlCommentNode node) {
-        return node;
-    }
-
-    public ASTnode visit(HtmlCommentMiscNode node) {
-        return node;
-    }
-
-    public ASTnode visit(HtmlMiscWsNode node) {
-        return node;
-    }
-
-    // =============== HtmlAttribute =================
-    public ASTnode visit(AttrNoValueNode node) {
-        return node;
-    }
+    public ASTnode visit(HtmlTextNode node) { return node; }
+    public ASTnode visit(HtmlWsNode node) { return node; }
+    public ASTnode visit(HtmlCommentNode node) { return node; }
+    public ASTnode visit(HtmlCommentMiscNode node) { return node; }
+    public ASTnode visit(HtmlMiscWsNode node) { return node; }
+    public ASTnode visit(AttrNoValueNode node) { return node; }
 
     public ASTnode visit(AttrWithValueNode node) {
         if (node.value != null) visit(node.value);
@@ -99,38 +64,13 @@ public class HTMLASTVisitor {
         return node;
     }
 
-    public ASTnode visit(UnquotedAttrNode node) {
-        return node;
-    }
+    public ASTnode visit(UnquotedAttrNode node) { return node; }
+    public ASTnode visit(CDataNode node) { return node; }
+    public ASTnode visit(ScriptletNode node) { return node; }
+    public ASTnode visit(SeaWsNode node) { return node; }
+    public ASTnode visit(DtdNode node) { return node; }
+    public ASTnode visit(XmlDeclarationNode node) { return node; }
 
-    // =============== AttributeValue =================
-
-    // =============== CData =================
-    public ASTnode visit(CDataNode node) {
-        return node;
-    }
-
-    // =============== Scriptlet =================
-    public ASTnode visit(ScriptletNode node) {
-        return node;
-    }
-
-    // =============== SeaWs =================
-    public ASTnode visit(SeaWsNode node) {
-        return node;
-    }
-
-    // =============== Dtd =================
-    public ASTnode visit(DtdNode node) {
-        return node;
-    }
-
-    // =============== XmlDeclaration =================
-    public ASTnode visit(XmlDeclarationNode node) {
-        return node;
-    }
-
-    // =============== Accept method for polymorphism =================
     public ASTnode visit(ASTnode node) {
         if (node instanceof HtmlDocumentNode doc) return visit(doc);
         if (node instanceof HtmlElementsNode elems) return visit(elems);
